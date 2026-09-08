@@ -1,0 +1,39 @@
+import type { Tool } from '../types';
+export const disclaimer = 'Trải nghiệm này được thiết kế cho mục đích giải trí và tự suy ngẫm. Kết quả không thay thế tư vấn khoa học, y tế, tâm lý hoặc chuyên môn, đồng thời không phải là dự đoán chắc chắn về tương lai.';
+export const tools: Tool[] = [
+ {slug:'numerology',name:'Thần số học',description:'Những con số kể một câu chuyện. Câu chuyện của bạn là gì?',category:'Ngày sinh & vũ trụ',color:'#B69CFF',icon:'Orbit',input:'Họ tên & ngày sinh',minutes:2,kind:'date',method:'Cộng các chữ số của ngày sinh, giữ các số 11, 22 và 33 ở bước rút gọn. Tên được bỏ dấu tiếng Việt, đổi Đ thành D rồi quy đổi A–Z theo hệ Pythagoras 1–9. Nguyên âm A, E, I, O, U được dùng cho số linh hồn; Y được tính là phụ âm.'},
+ {slug:'tarot',name:'Tarot',description:'Một lá bài, một khoảng lặng, một góc nhìn bạn chưa từng nghĩ đến.',category:'Trực giác & biểu tượng',color:'#F2C66D',icon:'Layers',input:'Một câu hỏi',minutes:3,kind:'tarot',method:'Rút ngẫu nhiên không lặp từ bộ 78 lá bài, với xác suất xuôi và ngược bằng nhau. Các diễn giải là lời mời tự phản chiếu, không phải dự báo. Trải ba lá nhìn vào bối cảnh, hiện tại và gợi ý hành động.'},
+ {slug:'lunar-profile',name:'Hồ sơ Mặt Trăng',description:'Tìm một nhịp điệu của riêng mình, dưới ánh trăng ngày bạn đến.',category:'Ngày sinh & vũ trụ',color:'#82DFFF',icon:'Moon',input:'Ngày sinh',minutes:2,kind:'date',method:'Ước tính tuổi trăng từ mốc trăng mới 06/01/2000 18:14 UTC và chu kỳ trung bình 29,530588853 ngày. Giờ nhập được hiểu là UTC+7, mặc định 12:00. Không phải dữ liệu thiên văn chính xác; ngày sát ranh giới pha có thể khác.'},
+ {slug:'dream-interpretation',name:'Giải mã giấc mơ',description:'Lắng nghe những biểu tượng mà thế giới trong bạn để lại.',category:'Trực giác & biểu tượng',color:'#F39AB8',icon:'CloudMoon',input:'Mô tả giấc mơ',minutes:3,kind:'dream',method:'So khớp từ khóa với từ điển biểu tượng tiếng Việt lưu trong ứng dụng. Cảm xúc và biểu tượng lặp lại giúp đặt câu hỏi suy ngẫm, không được dùng để chẩn đoán tâm lý.'},
+ {slug:'birth-chart',name:'Bản đồ sao',description:'Một lời chào từ bầu trời, một góc nhìn về thế giới bên trong.',category:'Ngày sinh & vũ trụ',color:'#9DAEFF',icon:'Compass',input:'Ngày, giờ & nơi sinh',minutes:3,kind:'date',method:'Phiên bản cơ bản xác định cung Mặt Trời gần đúng theo các mốc ngày cố định của hoàng đạo nhiệt đới. Ngày chuyển cung có thể sai một ngày. Chưa tính cung Mặt Trăng hoặc cung Mọc vì chưa có lịch thiên văn, tọa độ và múi giờ lịch sử. Địa điểm chỉ là bối cảnh, không được dùng để giả lập tọa độ.'},
+ {slug:'element-personality',name:'Tính cách nguyên tố',description:'Lửa, Nước, Đất hay Khí — điều gì nuôi dưỡng năng lượng của bạn?',category:'Tính cách & bản sắc',color:'#9FE4C2',icon:'Flame',input:'Bài trắc nghiệm',minutes:3,kind:'quiz',method:'Sáu câu hỏi tình huống, mỗi lựa chọn cộng một điểm cho một nguyên tố. Khi bằng điểm, ưu tiên thứ tự Lửa, Nước, Đất, Khí. Đây là phân nhóm biểu tượng, không phải đánh giá tâm lý chuẩn hóa.'},
+ {slug:'chinese-zodiac',name:'Hoàng đạo Trung Hoa',description:'Khám phá con giáp và ngũ hành trong vòng tuần hoàn phương Đông.',category:'Ngày sinh & vũ trụ',color:'#ED9D8E',icon:'Sun',input:'Ngày sinh',minutes:2,kind:'date',method:'Dùng lịch Trung Hoa của trình duyệt (Intl Chinese calendar) để lấy năm âm lịch, bao gồm ngày trước Tết. Thiên can xác định ngũ hành theo chu kỳ 10 năm. Nếu trình duyệt không hỗ trợ, công cụ thông báo lỗi thay vì âm thầm dùng năm dương lịch.'},
+ {slug:'spirit-animal',name:'Linh vật đại diện',description:'Gặp một người bạn biểu tượng đồng điệu với bản năng của bạn.',category:'Tính cách & bản sắc',color:'#8CCBB1',icon:'Bird',input:'Bài trắc nghiệm',minutes:3,kind:'quiz',method:'Sáu câu hỏi gán điểm cho Cáo, Hươu, Sói và Đại bàng. Khi hòa điểm, dùng thứ tự cố định này. Linh vật ở đây là hình tượng văn học, không xác nhận một thực thể tâm linh thật sự.'},
+ {slug:'fantasy-archetype',name:'Nhân vật giả tưởng',description:'Nếu cuộc đời là một câu chuyện, bạn sẽ bước vào vai trò nào?',category:'Tính cách & bản sắc',color:'#E3BD86',icon:'WandSparkles',input:'Bài trắc nghiệm',minutes:4,kind:'quiz',method:'Sáu câu hỏi, tám lựa chọn đại diện cho Pháp sư, Chiến binh, Kẻ lang thang, Người chữa lành, Học giả, Kiểm lâm, Nhà giả kim và Nhà tiên tri. Điểm hòa ưu tiên thứ tự cố định trên; kết quả phụ là vai trò có điểm cao thứ hai.'},
+];
+export const quizQuestions = ['Khi một hành trình mới bắt đầu, bạn thường…','Giữa những ngày nhiều biến động, điều giúp bạn cân bằng là…','Trong một nhóm bạn, bạn muốn đóng góp bằng cách…','Nếu có một buổi chiều hoàn toàn tự do, bạn sẽ…','Đứng trước một điều chưa biết, bạn thường chọn…','Bạn muốn mang điều gì vào chương tiếp theo của mình?'];
+export const quizAnswers = [
+ ['Chủ động thử một hướng đi mới','Lắng nghe cảm xúc của mình','Chuẩn bị một kế hoạch vững vàng','Tìm hiểu và kết nối các ý tưởng'],
+ ['Vận động và bắt tay vào việc','Một cuộc trò chuyện chân thành','Những thói quen nhỏ quen thuộc','Một không gian để suy nghĩ'],
+ ['Khơi dậy sự hào hứng','Quan tâm đến cảm xúc mọi người','Biến ý tưởng thành việc cụ thể','Đề xuất một góc nhìn mới'],
+ ['Thử một trải nghiệm mới','Viết nhật ký hoặc nghe nhạc','Chăm cây, nấu ăn, làm thủ công','Đọc sách hoặc đi dạo khám phá'],
+ ['Bước tới và học trong lúc làm','Cảm nhận điều gì phù hợp với mình','Quan sát rồi tiến từng bước','Đặt câu hỏi và thử giả thuyết'],
+ ['Lòng can đảm để bắt đầu','Sự dịu dàng và kết nối','Sự bền bỉ và nền tảng','Tự do và trí tò mò'],
+];
+export const fantasyAnswers = ['Tìm quy luật ẩn sau mọi việc','Bảo vệ điều mình tin tưởng','Bước ra ngoài con đường quen thuộc','Mang sự dịu dàng đến mọi người','Tìm hiểu thật sâu trước khi quyết định','Quan sát thiên nhiên và giữ cân bằng','Kết hợp những ý tưởng thành điều mới','Lắng nghe trực giác và hình dung khả năng'];
+export const identities = {
+ elements: ['Lửa','Nước','Đất','Khí'], animals: ['Cáo','Hươu','Sói','Đại bàng'], fantasy: ['Pháp sư','Chiến binh','Kẻ lang thang','Người chữa lành','Học giả','Kiểm lâm','Nhà giả kim','Nhà tiên tri'],
+ traits: [['Can đảm','Chủ động','Nhiệt thành'],['Đồng cảm','Tinh tế','Kết nối'],['Bền bỉ','Thực tế','Đáng tin'],['Tò mò','Tự do','Sáng tạo'],['Quan sát','Suy tư','Ham học'],['Cân bằng','Kiên nhẫn','Bảo vệ'],['Thử nghiệm','Linh hoạt','Đổi mới'],['Trực giác','Tưởng tượng','Nhạy bén']],
+};
+export const dreamSymbols = [
+ {words:['nước','biển','sông','mưa'],name:'Nước',meaning:'Dòng nước có thể gợi liên tưởng đến cảm xúc đang chuyển động và khả năng thích nghi.'},
+ {words:['bay','cánh','chim'],name:'Bay',meaning:'Bay có thể là hình ảnh của tự do, khoảng cách hoặc mong muốn nhìn sự việc từ một góc rộng hơn.'},
+ {words:['nhà','phòng','cửa'],name:'Ngôi nhà',meaning:'Không gian sống có thể gợi về sự an toàn, ranh giới cá nhân và những điều bạn đang giữ riêng.'},
+ {words:['đuổi','chạy','trốn'],name:'Cuộc đuổi bắt',meaning:'Cuộc đuổi bắt có thể mời bạn suy nghĩ về một việc đang trì hoãn hoặc một nhịp sống quá nhanh.'},
+ {words:['rơi','ngã'],name:'Rơi',meaning:'Cảm giác rơi có thể gợi suy ngẫm về việc buông kiểm soát hoặc tìm một điểm tựa.'},
+ {words:['rừng','cây','hoa'],name:'Thiên nhiên',meaning:'Cây cối có thể tượng trưng cho quá trình phát triển chậm rãi và nhu cầu được nuôi dưỡng.'},
+ {words:['đường','tàu','xe','chuyến'],name:'Hành trình',meaning:'Một hành trình có thể gợi mở câu hỏi về hướng đi và nhịp độ mà bạn muốn lựa chọn.'},
+ {words:['mèo','chó','rắn'],name:'Động vật',meaning:'Con vật trong mơ có thể gợi những liên tưởng rất riêng về bản năng, sự gần gũi hoặc điều chưa quen.'},
+ {words:['thi','trường','học'],name:'Học tập',meaning:'Bối cảnh học tập có thể mời bạn nhìn lại kỳ vọng và cách mình đối diện với thử thách.'},
+ {words:['trăng','sao','trời'],name:'Bầu trời',meaning:'Bầu trời có thể gợi không gian để tưởng tượng, nghỉ ngơi và nhìn xa hơn điều trước mắt.'},
+];

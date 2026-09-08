@@ -1,0 +1,2 @@
+import { Component, type ReactNode } from 'react';
+export class ErrorBoundary extends Component<{children:ReactNode},{failed:boolean}>{state={failed:false};static getDerivedStateFromError(){return {failed:true};}render(){if(this.state.failed)return <main className="container page"><div className="empty"><h1>Một vì sao đang tạm khuất.</h1><p>Trang chưa thể hiển thị. Dữ liệu của bạn chưa bị xóa. Hãy tải lại để thử thêm lần nữa.</p><button className="button primary" onClick={()=>window.location.reload()}>Tải lại trang</button></div></main>;return this.props.children;}}

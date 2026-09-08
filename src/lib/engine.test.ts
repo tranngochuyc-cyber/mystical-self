@@ -1,0 +1,13 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { calculate, drawTarot, lunar, numerology, reduceNumber, score, sunSign, validDate, zodiac } from './engine';
+import { tarotDeck } from '../data/tarotDeck';
+import { tools } from '../data/content';
+test('Ngày sinh: chặn ngày không tồn tại, tương lai và năm ngoài phạm vi',()=>{assert.equal(validDate('2000-02-29'),true);assert.equal(validDate('2001-02-29'),false);assert.equal(validDate('2024-04-31'),false);assert.equal(validDate('2099-01-01'),false);assert.equal(validDate('1899-01-01'),false);assert.equal(validDate(''),false);});
+test('Giữ master number và bỏ dấu tiếng Việt nhất quán',()=>{assert.equal(reduceNumber(29),11);assert.equal(reduceNumber(22),22);assert.equal(reduceNumber(33),33);assert.equal(reduceNumber(99),9);assert.deepEqual(numerology('Đặng Ánh','1990-01-01'),numerology('Dang Anh','1990-01-01'));assert.equal(numerology('An','1990-01-01').life,3);});
+test('Tarot có 78 lá duy nhất; trải ba lá không lặp',()=>{assert.equal(tarotDeck.length,78);assert.equal(new Set(tarotDeck.map(c=>c.name)).size,78);for(let i=0;i<40;i++){const cards=drawTarot(3);assert.equal(new Set(cards.map(c=>c.name)).size,3);assert(cards.every(c=>typeof c.reversed==='boolean'));}});
+test('Hòa điểm trắc nghiệm có thứ tự phụ ổn định',()=>{assert.deepEqual(score([0,1,2,3],4).map(x=>x.index),[0,1,2,3]);assert.equal(score([3,3,1,0],4)[0].index,3);});
+test('Pha trăng tại mốc trăng mới và trăng tròn gần đúng',()=>{const zero=lunar('2000-01-07','01:14');assert.equal(zero.phase,0);assert.equal(zero.illumination,0);const full=lunar('2000-01-21','19:00');assert.equal(full.phase,4);assert(full.illumination>=99);});
+test('Con giáp đổi theo Tết âm lịch, không phải ngày 1/1',()=>{assert.equal(zodiac('2024-02-09').animal,'Mão');assert.equal(zodiac('2024-02-10').animal,'Thìn');assert.equal(zodiac('2024-02-10').element,'Mộc');assert.equal(zodiac('2000-02-04').year,1999);});
+test('Mặt Trời: các ranh giới ngày quy ước',()=>{assert.equal(sunSign('2000-03-20'),'Song Ngư');assert.equal(sunSign('2000-03-21'),'Bạch Dương');assert.equal(sunSign('2000-12-25'),'Ma Kết');});
+test('Cả chín công cụ tạo kết quả có nội dung; giấc mơ lạ có fallback',()=>{for(const t of tools){const r=calculate(t.slug,{name:'Nguyễn Minh An',date:'2000-05-16',time:'12:00',place:'Hà Nội',question:'Mình nên suy ngẫm điều gì?',spread:'3',dream:'Mình nhìn thấy biển và cây trong khu rừng.',emotion:'Bình yên',answers:[0,1,2,3,0,1]});assert(r.title.length>0);assert(r.details.length>0);assert(r.facts.length>0);}assert.match(calculate('dream-interpretation',{dream:'Một hình khối màu tím rất kỳ lạ'}).details,/chưa tìm thấy/);});
