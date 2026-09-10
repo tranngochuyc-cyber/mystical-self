@@ -1,4 +1,5 @@
 import type { Reading } from '../types';
+import { tools } from '../data/content';
 const prefix='mystical-self:';
 let issue='';
 export function storageIssue(){return issue;}
@@ -19,5 +20,10 @@ if(typeof window!=='undefined'&&window.location.protocol.startsWith('http')){
     const local=getReadings();
     if(remote.length){write('readings',remote);window.dispatchEvent(new Event('storage'));}
     else if(local.length){void saveReadings(local);}
+  }).catch(()=>{});
+  void fetch('/api/admin/content',{credentials:'include'}).then(async response=>response.ok?await response.json():null).then((remote:unknown)=>{
+    if(!Array.isArray(remote))return;
+    for(const item of remote){if(!item||typeof item.slug!=='string')continue;const local=tools.find(tool=>tool.slug===item.slug);if(local)Object.assign(local,{name:item.name,description:item.description,category:item.category,color:item.color,minutes:Number(item.minutes),input:item.input,method:item.method});}
+    window.dispatchEvent(new Event('storage'));
   }).catch(()=>{});
 }
