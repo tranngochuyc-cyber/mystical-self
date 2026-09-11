@@ -1,0 +1,33 @@
+// Editorial symbolism, not astronomical coordinates or a personality assessment.
+export type Element = 'Lửa' | 'Đất' | 'Khí' | 'Nước';
+export const elementColors: Record<Element, string> = { Lửa: '#e7a178', Đất: '#a3c9a8', Khí: '#dec68d', Nước: '#8ecbdf' };
+export const zodiacSigns = [
+  { name: 'Bạch Dương', latin: 'Aries', symbol: '♈︎', dates: '21.03 — 19.04', element: 'Lửa', ruler: 'Sao Hỏa', theme: 'Can đảm để bắt đầu', strength: 'Chủ động mở lối và dám thử điều mới.', growth: 'Chừa một nhịp lắng nghe trước khi hành động.', reflection: 'Điều gì xứng đáng với bước đi đầu tiên của bạn?' },
+  { name: 'Kim Ngưu', latin: 'Taurus', symbol: '♉︎', dates: '20.04 — 20.05', element: 'Đất', ruler: 'Sao Kim', theme: 'Chậm lại để bén rễ', strength: 'Kiên trì chăm sóc những điều có giá trị.', growth: 'Một cách làm quen thuộc vẫn có thể thay đổi.', reflection: 'Bạn muốn nuôi dưỡng điều gì lâu dài?' },
+  { name: 'Song Tử', latin: 'Gemini', symbol: '♊︎', dates: '21.05 — 21.06', element: 'Khí', ruler: 'Sao Thủy', theme: 'Mở cửa cho trí tò mò', strength: 'Kết nối ý tưởng và nhìn từ nhiều phía.', growth: 'Chọn một điều để tìm hiểu đến tận cùng.', reflection: 'Cuộc trò chuyện nào giúp bạn nhìn khác đi?' },
+  { name: 'Cự Giải', latin: 'Cancer', symbol: '♋︎', dates: '22.06 — 22.07', element: 'Nước', ruler: 'Mặt Trăng', theme: 'Một nơi để trở về', strength: 'Nhận ra cảm xúc và chăm sóc sự gắn bó.', growth: 'Sự quan tâm cũng cần ranh giới rõ ràng.', reflection: 'Điều gì khiến bạn cảm thấy an toàn?' },
+  { name: 'Sư Tử', latin: 'Leo', symbol: '♌︎', dates: '23.07 — 22.08', element: 'Lửa', ruler: 'Mặt Trời', theme: 'Tỏa sáng bằng sự chân thành', strength: 'Biểu đạt và khơi dậy niềm vui chung.', growth: 'Giá trị của bạn không chỉ đến từ sự công nhận.', reflection: 'Bạn muốn sáng tạo điều gì cho riêng mình?' },
+  { name: 'Xử Nữ', latin: 'Virgo', symbol: '♍︎', dates: '23.08 — 22.09', element: 'Đất', ruler: 'Sao Thủy', theme: 'Vẻ đẹp của điều nhỏ', strength: 'Quan sát tinh tế và cải thiện từng bước.', growth: 'Cho phép một việc tốt mà chưa hoàn hảo.', reflection: 'Thói quen nhỏ nào đang hỗ trợ bạn?' },
+  { name: 'Thiên Bình', latin: 'Libra', symbol: '♎︎', dates: '23.09 — 22.10', element: 'Khí', ruler: 'Sao Kim', theme: 'Tìm nhịp hài hòa', strength: 'Cân nhắc nhiều góc nhìn và kết nối công bằng.', growth: 'Giữ tiếng nói của mình khi tìm sự đồng thuận.', reflection: 'Bạn muốn nói rõ nhu cầu nào?' },
+  { name: 'Bọ Cạp', latin: 'Scorpio', symbol: '♏︎', dates: '23.10 — 21.11', element: 'Nước', ruler: 'Sao Diêm Vương · hiện đại', theme: 'Đi sâu để đổi mới', strength: 'Bền lòng khám phá điều thực sự có ý nghĩa.', growth: 'Cho niềm tin thời gian lớn lên từng chút.', reflection: 'Điều gì đã đến lúc bạn buông xuống?' },
+  { name: 'Nhân Mã', latin: 'Sagittarius', symbol: '♐︎', dates: '22.11 — 21.12', element: 'Lửa', ruler: 'Sao Mộc', theme: 'Đi xa để mở lòng', strength: 'Tìm ý nghĩa và đón nhận những khả năng mới.', growth: 'Biến một ý tưởng lớn thành bước nhỏ khả thi.', reflection: 'Bạn muốn học gì từ một người khác mình?' },
+  { name: 'Ma Kết', latin: 'Capricorn', symbol: '♑︎', dates: '22.12 — 19.01', element: 'Đất', ruler: 'Sao Thổ', theme: 'Xây điều bền vững', strength: 'Cam kết với mục tiêu và chịu trách nhiệm.', growth: 'Nghỉ ngơi cũng là một phần của đường dài.', reflection: 'Định nghĩa thành công nào là của chính bạn?' },
+  { name: 'Bảo Bình', latin: 'Aquarius', symbol: '♒︎', dates: '20.01 — 18.02', element: 'Khí', ruler: 'Sao Thiên Vương · hiện đại', theme: 'Tưởng tượng một lối khác', strength: 'Đặt câu hỏi và mang góc nhìn mới vào tập thể.', growth: 'Kết nối ý tưởng với cảm xúc của người bên cạnh.', reflection: 'Bạn muốn thay đổi điều nhỏ nào trong cộng đồng?' },
+  { name: 'Song Ngư', latin: 'Pisces', symbol: '♓︎', dates: '19.02 — 20.03', element: 'Nước', ruler: 'Sao Hải Vương · hiện đại', theme: 'Lắng nghe điều chưa thành lời', strength: 'Đồng cảm, tưởng tượng và cảm nhận sắc thái.', growth: 'Một ranh giới nhẹ nhàng giúp bạn giữ năng lượng.', reflection: 'Bạn muốn dành không gian cho cảm xúc nào?' },
+] satisfies { name: string; latin: string; symbol: string; dates: string; element: Element; ruler: string; theme: string; strength: string; growth: string; reflection: string }[];
+
+export const planets = [
+  { name: 'Mặt Trời', english: 'Sun', symbol: '☉︎', color: '#e5b967', type: 'Ngôi sao', theme: 'Bản sắc & biểu đạt', message: 'Điều gì khiến bạn thấy mình đang sống đúng với giá trị của bản thân?' },
+  { name: 'Mặt Trăng', english: 'Moon', symbol: '☽︎', color: '#c0d1e4', type: 'Vệ tinh của Trái Đất', theme: 'Cảm xúc & chăm sóc', message: 'Bạn cần gì để cảm thấy được nâng đỡ vào lúc này?' },
+  { name: 'Sao Thủy', english: 'Mercury', symbol: '☿︎', color: '#a9bbb9', type: 'Hành tinh', theme: 'Suy nghĩ & giao tiếp', message: 'Bạn có thể diễn đạt điều đang nghĩ bằng cách rõ ràng và tử tế hơn không?' },
+  { name: 'Sao Kim', english: 'Venus', symbol: '♀︎', color: '#e3c5a0', type: 'Hành tinh', theme: 'Giá trị & kết nối', message: 'Một việc giản dị nào làm cuộc sống của bạn đẹp hơn?' },
+  { name: 'Sao Hỏa', english: 'Mars', symbol: '♂︎', color: '#dc9078', type: 'Hành tinh', theme: 'Hành động & can đảm', message: 'Bạn muốn dùng năng lượng của mình cho việc gì?' },
+  { name: 'Sao Mộc', english: 'Jupiter', symbol: '♃︎', color: '#d9b18c', type: 'Hành tinh', theme: 'Học hỏi & mở rộng', message: 'Góc nhìn mới nào có thể mở rộng điều bạn tin là có thể?' },
+  { name: 'Sao Thổ', english: 'Saturn', symbol: '♄︎', color: '#cfbd8a', type: 'Hành tinh', theme: 'Ranh giới & thời gian', message: 'Cam kết nhỏ nào bạn sẵn lòng giữ trong một tháng?' },
+  { name: 'Sao Thiên Vương', english: 'Uranus', symbol: '♅︎', color: '#8ecbd1', type: 'Hành tinh', theme: 'Đổi mới & độc lập', message: 'Bạn muốn thử thay một thói quen bằng điều gì?' },
+  { name: 'Sao Hải Vương', english: 'Neptune', symbol: '♆︎', color: '#8da7e5', type: 'Hành tinh', theme: 'Tưởng tượng & lý tưởng', message: 'Giấc mơ nào cần một bước thực tế để trở nên gần hơn?' },
+  { name: 'Sao Diêm Vương', english: 'Pluto', symbol: '♇︎', color: '#caa6aa', type: 'Hành tinh lùn', theme: 'Chuyển hóa & buông bỏ', message: 'Bạn đã vượt qua điều gì mà trước đây tưởng mình không thể?' },
+];
+
+export const moonPhases = ['Trăng mới', 'Lưỡi liềm đầu tháng', 'Thượng huyền', 'Khuyết dần đầy', 'Trăng tròn', 'Khuyết dần vơi', 'Hạ huyền', 'Lưỡi liềm cuối tháng'];
+export const moonPrompts = ['Gieo một ý định nhỏ.', 'Chăm sóc điều vừa bắt đầu.', 'Chọn một bước đi cụ thể.', 'Điều chỉnh trước khi hoàn tất.', 'Ghi nhận điều đã lớn lên.', 'Chia sẻ một điều bạn học được.', 'Buông một việc không còn cần thiết.', 'Cho mình một khoảng nghỉ.'];

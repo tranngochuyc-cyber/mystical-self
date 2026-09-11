@@ -1,0 +1,14 @@
+import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
+import { ExperienceSection } from './ExperienceSection';
+
+const articles = [
+  { title: 'Cung Mặt Trời không kể hết về bạn', category: 'Đọc biểu tượng', text: 'Một nhãn cung có thể khơi gợi liên tưởng, nhưng không chứa toàn bộ trải nghiệm, lựa chọn và hoàn cảnh sống. Thay vì hỏi “mình có đúng như vậy không?”, hãy thử hỏi “điều này gợi mình nhớ tới tình huống nào?”. Bạn không cần ép mình khớp với một mô tả.' },
+  { title: 'Pha trăng và cung Mặt Trăng khác nhau thế nào?', category: 'Bầu trời cơ bản', text: 'Pha trăng mô tả phần bề mặt sáng mà ta nhìn thấy từ Trái Đất. Cung Mặt Trăng trong chiêm tinh lại liên quan tới vị trí của Mặt Trăng trên vòng hoàng đạo tại một thời điểm. Công cụ hiện tại chỉ ước tính pha trăng, không suy ra cung Mặt Trăng từ pha đó.' },
+  { title: 'Viết nhật ký từ một kết quả', category: 'Thực hành nhỏ', text: 'Chọn một câu khiến bạn dừng lại. Ghi một tình huống thực tế ủng hộ nó, một tình huống không phù hợp và một hành động nhỏ bạn muốn thử. Khi quay lại sau một tuần, so sánh trải nghiệm của mình thay vì xem kết quả như định mệnh.' },
+];
+export function CosmicKnowledge() {
+  return <ExperienceSection id="knowledge" className="knowledge-experience"><div className="container"><div className="knowledge-masthead"><div className="eyebrow">THE COSMIC JOURNAL</div><span>Ghi chép từ đài quan sát · 01</span></div><div className="knowledge-layout"><article className="knowledge-feature"><div className="eyebrow">BÀI ĐỌC NỔI BẬT · 2 PHÚT</div><h2>Biểu tượng là<br/><em>một câu hỏi mở.</em></h2><p>Điều đáng giữ không phải một lời định nghĩa, mà là cuộc trò chuyện bạn bắt đầu với chính mình.</p><details><summary>Đọc tiếp: cách dùng một góc nhìn mới</summary><p>Khi đọc một kết quả, bạn có thể đồng ý, thấy khác đi hoặc chưa biết. Cả ba đều là phản hồi có ích. Hãy đặt trải nghiệm thật của mình cạnh câu chữ, nhìn vào lựa chọn có thể thực hiện và cho phép ý nghĩa thay đổi theo thời gian.</p><p>Chiêm tinh và các hệ biểu tượng ở đây phục vụ giải trí, học hỏi và tự suy ngẫm. Chúng không phải phép đo tính cách được kiểm chứng hay công cụ để quyết định thay bạn.</p></details><Link className="text-link" to="/about">Phương pháp & giới hạn <ArrowUpRight size={17}/></Link></article>
+      <div className="knowledge-stories">{articles.map((article, i) => <article key={article.title}><span className="story-number">0{i + 1}</span><div><div className="eyebrow">{article.category}</div><h3>{article.title}</h3><details><summary>Đọc ghi chép</summary><p>{article.text}</p>{i === 1 && <a className="text-link" href="https://science.nasa.gov/moon/moon-phases/" target="_blank" rel="noreferrer">Đọc về pha trăng tại NASA ↗</a>}</details></div></article>)}<Link className="button" to="/journal">Mở sổ ghi chép <ArrowUpRight size={16}/></Link></div>
+    </div></div></ExperienceSection>;
+}

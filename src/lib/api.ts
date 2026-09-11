@@ -1,4 +1,5 @@
 import type { Reading } from '../types';
+import type { Article, ArticleInput } from '../types';
 export interface Session { authenticated:boolean; id?:string; email?:string; name?:string; isAdmin?:boolean }
 async function request<T>(path:string,init:RequestInit={}):Promise<T>{const response=await fetch(path,{credentials:'include',headers:{'content-type':'application/json',...(init.headers||{})},...init});if(!response.ok)throw new Error((await response.json().catch(()=>null))?.error||`Yêu cầu thất bại (${response.status})`);return response.json();}
 export const getSession=()=>request<Session>('/api/me');
@@ -11,3 +12,7 @@ export interface EditableTool { slug:string; name:string; description:string; ca
 export const getAdminContent=()=>request<EditableTool[]>('/api/admin/content');
 export const saveAdminContent=(tool:EditableTool)=>request<{ok:boolean}>(`/api/admin/content/${tool.slug}`,{method:'PUT',body:JSON.stringify(tool)});
 export const getAdminOverview=()=>request<{readings:number;users:number}>('/api/admin/overview');
+export const getArticles=(mine=false)=>request<Article[]>(`/api/articles${mine?'?mine=1':''}`);
+export const getArticle=(slug:string)=>request<Article>(`/api/articles/${encodeURIComponent(slug)}`);
+export const createArticle=(value:ArticleInput)=>request<Article>('/api/articles',{method:'POST',body:JSON.stringify(value)});
+export const updateArticle=(id:string,value:ArticleInput)=>request<Article>(`/api/articles/${encodeURIComponent(id)}`,{method:'PUT',body:JSON.stringify(value)});

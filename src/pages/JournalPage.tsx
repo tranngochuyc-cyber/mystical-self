@@ -1,0 +1,39 @@
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { ArrowLeft, ArrowRight, Edit3, Feather, Save } from 'lucide-react';
+import { createArticle, getArticle, getArticles, getSession, updateArticle } from '../lib/api';
+import type { Article, ArticleInput } from '../types';
+
+const empty: ArticleInput = { title: '', excerpt: '', content: '', category: 'Ghi chép', status: 'draft' };
+const date = (value:string) => new Intl.DateTimeFormat('vi-VN',{day:'2-digit',month:'2-digit',year:'numeric'}).format(new Date(value));
+
+function JournalIndex(){
+  const [articles,setArticles]=useState<Article[]>([]),[loading,setLoading]=useState(true),[error,setError]=useState('');
+  useEffect(()=>{void getArticles().then(setArticles).catch(e=>setError(e instanceof Error?e.message:'Không thể tải bài viết.')).finally(()=>setLoading(false));},[]);
+  return <div className="container page journal-page"><div className="journal-heading"><div><div className="eyebrow">COSMIC JOURNAL</div><h1>Những ghi chép<br/><em>có thể lớn lên.</em></h1><p>Nơi đọc, viết và tiếp tục chỉnh sửa những điều bạn muốn lưu lại.</p></div><Link className="button primary" to="/write"><Feather size={17}/> Viết bài mới</Link></div>
+    {loading&&<div className="journal-state" aria-live="polite">Đang mở sổ ghi chép…</div>}
+    {error&&<div className="journal-state"><h2>Chưa mở được sổ ghi chép.</h2><p>{error}</p><a className="button" href="/signin-with-chatgpt?return_to=/journal">Đăng nhập để tiếp tục</a></div>}
+    {!loading&&!error&&!articles.length&&<div className="journal-state"><Feather/><h2>Trang đầu tiên đang chờ bạn.</h2><p>Tạo một bài nháp, chỉnh sửa dần và chỉ xuất bản khi đã sẵn sàng.</p><Link className="button primary" to="/write">Bắt đầu viết</Link></div>}
+    {!!articles.length&&<div className="journal-list">{articles.map(article=><article key={article.id} className="journal-row"><div className="journal-row-meta"><span>{article.category}</span><time dateTime={article.updatedAt}>{date(article.updatedAt)}</time>{article.status==='draft'&&<span className="draft-badge">Bản nháp</span>}</div><div><h2><Link to={`/journal/${article.slug}`}>{article.title}</Link></h2><p>{article.excerpt}</p></div><div className="journal-row-actions"><Link className="text-link" to={`/journal/${article.slug}`}>Đọc bài <ArrowRight size={15}/></Link>{article.editable&&<Link className="icon-button" aria-label={`Chỉnh sửa ${article.title}`} to={`/write/${article.id}`}><Edit3 size={17}/></Link>}</div></article>)}</div>}
+  </div>;
+}
+
+function JournalDetail({slug}:{slug:string}){
+  const [article,setArticle]=useState<Article|null>(null),[error,setError]=useState('');
+  useEffect(()=>{void getArticle(slug).then(setArticle).catch(e=>setError(e instanceof Error?e.message:'Không thể tải bài viết.'));},[slug]);
+  if(error)return <div className="container page journal-state"><h1>Chưa tìm thấy bài viết.</h1><p>{error}</p><Link className="button" to="/journal">Về sổ ghi chép</Link></div>;
+  if(!article)return <div className="container page journal-state" aria-live="polite">Đang mở bài viết…</div>;
+  return <article className="container page article-page"><Link className="back-link" to="/journal"><ArrowLeft size={16}/> Sổ ghi chép</Link><header><div className="eyebrow">{article.category} · {article.status==='draft'?'BẢN NHÁP':'ĐÃ XUẤT BẢN'}</div><h1>{article.title}</h1><p className="article-lead">{article.excerpt}</p><div className="article-byline"><span>{article.authorName}</span><time dateTime={article.updatedAt}>Cập nhật {date(article.updatedAt)}</time>{article.editable&&<Link className="button" to={`/write/${article.id}`}><Edit3 size={16}/> Chỉnh sửa</Link>}</div></header><div className="article-body">{article.content.split(/\n{2,}/).map((paragraph,index)=><p key={index}>{paragraph}</p>)}</div><footer><Link className="text-link" to="/journal">Khám phá bài viết khác <ArrowRight size={16}/></Link></footer></article>;
+}
+
+function JournalEditor({id}:{id?:string}){
+  const navigate=useNavigate();const [value,setValue]=useState<ArticleInput>(empty),[loading,setLoading]=useState(Boolean(id)),[saving,setSaving]=useState(false),[message,setMessage]=useState(''),[signedIn,setSignedIn]=useState<boolean|null>(null);
+  useEffect(()=>{void getSession().then(s=>setSignedIn(s.authenticated)).catch(()=>setSignedIn(false));if(id)void getArticle(id).then(a=>setValue({title:a.title,excerpt:a.excerpt,content:a.content,category:a.category,status:a.status})).catch(e=>setMessage(e instanceof Error?e.message:'Không thể tải bản nháp.')).finally(()=>setLoading(false));},[id]);
+  const change=<K extends keyof ArticleInput>(key:K,next:ArticleInput[K])=>setValue(current=>({...current,[key]:next}));
+  async function save(){setSaving(true);setMessage('');try{const saved=id?await updateArticle(id,value):await createArticle(value);navigate(`/journal/${saved.slug}`);}catch(e){setMessage(e instanceof Error?e.message:'Chưa thể lưu bài viết.');}finally{setSaving(false);}}
+  if(signedIn===false)return <div className="container page journal-state"><h1>Đăng nhập để viết.</h1><p>Bài viết được gắn với tài khoản của bạn để có thể mở lại và chỉnh sửa.</p><a className="button primary" href={`/signin-with-chatgpt?return_to=${id?`/write/${encodeURIComponent(id)}`:'/write'}`}>Đăng nhập với ChatGPT</a></div>;
+  if(loading)return <div className="container page journal-state">Đang mở bản nháp…</div>;
+  return <div className="container page editor-page"><Link className="back-link" to="/journal"><ArrowLeft size={16}/> Sổ ghi chép</Link><div className="editor-heading"><div><div className="eyebrow">{id?'TIẾP TỤC CHỈNH SỬA':'TRANG VIẾT MỚI'}</div><h1>{id?'Nuôi lớn ý tưởng.':'Bắt đầu từ một điều nhỏ.'}</h1></div><span>{value.content.length.toLocaleString('vi-VN')} / 30.000 ký tự</span></div><div className="article-editor"><label className="field"><span>Tiêu đề</span><input maxLength={120} value={value.title} onChange={e=>change('title',e.target.value)} placeholder="Điều bạn muốn gọi tên"/></label><div className="editor-fields"><label className="field"><span>Chủ đề</span><input maxLength={50} value={value.category} onChange={e=>change('category',e.target.value)} placeholder="Ghi chép"/></label><label className="field"><span>Trạng thái</span><select value={value.status} onChange={e=>change('status',e.target.value as ArticleInput['status'])}><option value="draft">Lưu bản nháp</option><option value="published">Xuất bản</option></select></label></div><label className="field"><span>Tóm tắt</span><textarea rows={3} maxLength={240} value={value.excerpt} onChange={e=>change('excerpt',e.target.value)} placeholder="Một vài dòng giúp người đọc biết bài viết nói về điều gì"/></label><label className="field"><span>Nội dung</span><textarea className="article-content-input" maxLength={30000} value={value.content} onChange={e=>change('content',e.target.value)} placeholder={'Viết nội dung ở đây.\n\nXuống hai dòng để tạo đoạn mới.'}/></label><div className="editor-actions"><p>{value.status==='draft'?'Chỉ bạn nhìn thấy bản nháp.':'Bài viết sẽ xuất hiện trong sổ ghi chép.'}</p><button className="button primary" disabled={saving||value.title.trim().length<3||value.excerpt.trim().length<10||value.content.trim().length<20} onClick={()=>void save()}><Save size={17}/>{saving?'Đang lưu…':value.status==='draft'?'Lưu bản nháp':'Lưu và xuất bản'}</button></div>{message&&<p className="notice" role="alert">{message}</p>}</div></div>;
+}
+
+export default function JournalPage(){const {slug,id}=useParams();const location=useLocation();if(location.pathname.startsWith('/write'))return <JournalEditor id={id}/>;if(slug)return <JournalDetail slug={slug}/>;return <JournalIndex/>;}
