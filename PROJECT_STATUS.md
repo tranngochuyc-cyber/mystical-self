@@ -1,8 +1,8 @@
 # PROJECT STATUS
 
-CURRENT PHASE: Dynamic Journal
-CURRENT WORK UNIT: WU-12 — lưu trữ và biên tập bài viết
-LAST SAFE CHECKPOINT: WU-12, 2026-09-11
+CURRENT PHASE: Public deployment
+CURRENT WORK UNIT: DEPLOY-GH-PAGES — readiness
+LAST SAFE CHECKPOINT: GitHub Pages ready, 2026-09-11
 SAFE TO STOP: YES
 
 ## COMPLETED
@@ -33,9 +33,9 @@ SAFE TO STOP: YES
 - Dev server có thể dừng khi phiên công cụ kết thúc; khởi động lại bằng npm run dev nếu localhost không kết nối.
 
 ## NEXT ACTION
-Sau khi người dùng kiểm tra bản online: WU-09A hoàn thiện giải thích ngắn cho người mới ở Codex detail. Không mở thêm tính năng Journal trước khi có phản hồi.
+Người dùng tạo/chọn GitHub repository và cung cấp URL hoặc kết nối remote. Sau đó push `main`; GitHub Actions sẽ public `dist/client`. Không tiếp tục feature trước khi public deploy hoàn tất.
 
-BUILD STATUS: PASS (npm run build, 2026-09-11). TEST STATUS: 9/9 PASS.
+BUILD STATUS: PASS cho Sites và GitHub Pages (2026-09-11). GITHUB PAGES DEPLOY: BLOCKED vì chưa có GitHub remote. SAFE TO STOP: YES.
 
 ## IMPORTANT ARCHITECTURE NOTES
 React/Vite/npm hiện hữu; giữ routes, migration, package-lock. knowledge.ts là nguồn quan hệ; cosmic components tái sử dụng. Nhà–cung chỉ là liên tưởng hiện đại có nhãn. Các chart cá nhân chưa tính thật phải giữ nhãn minh họa. Đọc PROJECT_TODO.md rồi chỉ đọc file của work unit tiếp theo; không full audit lại.

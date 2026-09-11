@@ -46,4 +46,10 @@ Artwork được tạo bằng AI và tối ưu thành hai atlas WebP; không ph�
 
 Build tạo dist/server/index.js và dist/client. .openai/hosting.json khai báo Site và D1 binding DB; migration giữ ở drizzle/. Worker xử lý /api/* và fallback SPA. Biến môi trường quản trị đặt qua Sites, không lưu bí mật trong source.
 
+GitHub Pages dùng `npm run build:pages` và workflow `.github/workflows/deploy.yml`. Workflow tự lấy tên repository để đặt base path và dùng HashRouter, vì Pages không có SPA fallback. Artifact công khai nằm ở `dist/client`.
+
+GitHub Pages là bản tĩnh: các công cụ chạy trong trình duyệt và dữ liệu cục bộ vẫn hoạt động, nhưng đăng nhập, D1, đồng bộ đa thiết bị và tạo/sửa bài viết cần Worker nên được hiển thị là không khả dụng. Bản Sites tiếp tục cung cấp các chức năng động này.
+
+Project hiện chưa có GitHub remote. Trước lần deploy đầu tiên, tạo hoặc chọn repository GitHub, thêm remote và push nhánh `main`; sau đó vào Settings → Pages và chọn nguồn `GitHub Actions` nếu GitHub chưa tự nhận workflow.
+
 Xem IMPLEMENTATION.md để biết audit, thay đổi theo phase và kết quả kiểm tra.

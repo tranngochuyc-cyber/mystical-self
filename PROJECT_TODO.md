@@ -1,6 +1,7 @@
 # PROJECT TODO
 
 ## [P0] Must
+- GITHUB PAGES: chờ người dùng tạo/chọn repository và cung cấp URL; thêm remote rồi push main, xác nhận workflow và URL public. Không tự tạo repository theo deployment safety task.
 - WU-12 DEPLOY: DONE — migration + Journal đã xuất bản riêng tư thành công.
 - WU-09A: beginner explanations ngay tại Codex detail. Done = nội dung ngắn đúng ngữ cảnh, đọc bằng keyboard/touch, build pass, kiểm tra route cung + nhà.
 - WU-09B: QA cuối Phase 2: đường dẫn liên quan, empty search, invalid entity, form tạo/lưu kết quả gốc, responsive tablet; sửa regression trước feature khác.

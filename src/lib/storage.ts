@@ -72,7 +72,7 @@ export async function clearData() {
     return true;
   } catch (error) { report(error); return false; }
 }
-if (typeof window !== 'undefined' && window.location.protocol.startsWith('http')) {
+if (typeof window !== 'undefined' && window.location.protocol.startsWith('http') && import.meta.env.MODE !== 'github-pages') {
   void (async () => {
     try {
       account = await getSession();

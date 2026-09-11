@@ -6,6 +6,6 @@ export function EntityArtwork({ entity, className = '' }: { entity: KnowledgeEnt
   const columns = atlas === 'zodiac' ? 4 : 5;
   const rows = atlas === 'zodiac' ? 3 : 2;
   return <div className={`entity-artwork ${className}`} role="img" aria-label={`Minh họa nghệ thuật ${entity.name}`}>
-    <img src={`/art/${atlas}-atlas.webp`} alt="" loading="lazy" decoding="async" style={{ width: `${columns * 100}%`, height: `${rows * 100}%`, left: `${-(index % columns) * 100}%`, top: `${-Math.floor(index / columns) * 100}%` }}/>
+    <img src={`${import.meta.env.BASE_URL}art/${atlas}-atlas.webp`} alt="" loading="lazy" decoding="async" style={{ width: `${columns * 100}%`, height: `${rows * 100}%`, left: `${-(index % columns) * 100}%`, top: `${-Math.floor(index / columns) * 100}%` }}/>
   </div>;
 }

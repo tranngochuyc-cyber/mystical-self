@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { storeSession } from '../lib/storage';
 
 export function AccountStatus() {
+  if (import.meta.env.MODE === 'github-pages') return <div className="account-status"><span>Bản công khai · lưu trên trình duyệt này<small>Kết quả không được đồng bộ giữa các thiết bị trên GitHub Pages.</small></span></div>;
+  return <DynamicAccountStatus/>;
+}
+function DynamicAccountStatus() {
   const [session, setSession] = useState(storeSession);
   useEffect(() => {
     const refresh = () => setSession(storeSession());
