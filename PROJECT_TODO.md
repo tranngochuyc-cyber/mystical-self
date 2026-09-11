@@ -1,29 +1,27 @@
 # PROJECT TODO
 
-## Phase 2 — COMPLETE
-- WU-01 shared foundation: DONE.
-- WU-02 Zodiac / WU-03 Planet / WU-04 House: DONE.
-- WU-05 Matrix / WU-06 Connection Map: DONE.
-- WU-07 Codex / WU-08 Explore Next and return flow: DONE.
-- WU-09 beginner explanations and concise sourced cultural notes: DONE.
-- WU-10 mobile Codex, input/reduced motion/navigation debt: DONE.
-- House P1 axes and three groups: DONE.
-- WU-11 final feature/data/regression/production QA: DONE.
+## Phase 3 Cosmic Identity — COMPLETE
+- Manual entry, three-sign builder, complete role-based result: DONE.
+- Shared-data element/modality distributions and deterministic creative archetype: DONE.
+- Planetary connections, house-analogy labels and Codex navigation: DONE.
+- Save/update/cancel/reset with scoped browser persistence and error messaging: DONE.
+- Compact identity card, beginner/privacy guidance and future fantasy slots: DONE.
+- Four viewport widths, keyboard/emulated touch, full flow, Phase 2 regression and both builds: PASS.
 
-## NEXT — Release pass (not authorized in completion pass)
-- Verify final commit, run production smoke QA and deploy only on user request.
-- Confirm static Pages limitations remain truthful; use separate backend hosting for server features.
-- Live authenticated multi-account QA belongs to server release; local backend tests cover access isolation.
+## Next — Phase 3 release QA + public deploy
+- Review local Phase 3 checkpoint and publish only on explicit request.
+- Confirm manual/local-only labels on public hosting and smoke-test save/reload/Codex flow.
+- Optional identity-card image export/share; UI card is ready, PNG export is not included.
+- Physical device and assistive-technology QA beyond browser automation.
 
-## Separate dynamic Journal / backend backlog (outside Phase 2 knowledge UI)
-- Autosave/recover unsaved drafts; retry/recovery for offline writes and conflict handling.
-- Consider reversible article deletion only if requested.
-- Verify account synchronization on live Worker before claiming multi-device reliability.
+## Phase 2 — COMPLETE and deployed
+Shared foundation; Zodiac/Planet/House Explorers; Matrix; Connection Map; Codex; Explore Next; beginner and responsive navigation; complete regression coverage retained.
 
-## Phase 3 / optional later content
-- Fantasy universe and long-form myth narratives; no kingdoms, gods, characters or storyline created now.
-- True ephemeris/ascendant/transit engine needs a verified engine and data.
-- Physical-device and assistive-technology coverage beyond current browser automation.
+## Separate backend / later-phase backlog
+- Journal unsaved-draft recovery, offline retries and conflict handling.
+- Live authenticated multi-account synchronization/recovery verification on Worker.
+- Verified astronomical engine/provider contract before any calculated Cosmic Profile mode.
+- Phase 4 fantasy universe, kingdoms/factions/artifacts and narratives only under a new scope.
 
 ## Execution rule
-Keep checkpoints buildable. No deployment or next phase without the requested scope. Avoid repeated full audits and preserve budget for tests/checkpoint.
+No automatic deployment or next phase. Keep buildable checkpoints and preserve existing user data.

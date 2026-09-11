@@ -23,6 +23,10 @@ export function write(key: string, value: unknown) {
   try { localStorage.setItem(prefix + key, JSON.stringify(value)); return true; }
   catch { issue = 'Trình duyệt không cho phép lưu hoặc đã hết dung lượng. Kết quả hiện chỉ tồn tại trong phiên này.'; return false; }
 }
+export function remove(key: string) {
+  try { localStorage.removeItem(prefix + key); return true; }
+  catch { issue = 'Trình duyệt không cho phép xóa dữ liệu này. Dữ liệu vẫn được giữ.'; return false; }
+}
 export function validReadings(value: unknown): Reading[] {
   if (!Array.isArray(value)) return [];
   return value.filter((r): r is Reading => !!r && typeof r.id === 'string' && tools.some(t => t.slug === r.toolSlug) && typeof r.createdAt === 'string' && typeof r.result?.title === 'string' && typeof r.result?.details === 'string' && Array.isArray(r.result?.traits) && Array.isArray(r.result?.facts));
