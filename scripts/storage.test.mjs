@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { build } from 'esbuild';
 
 test('Rapid saves use ordered per-record mutations and never clear the account', async () => {
-  const bundled = await build({ entryPoints: ['src/lib/storage.ts'], bundle: true, write: false, format: 'esm', platform: 'node' });
+  const bundled = await build({ entryPoints: ['src/lib/storage.ts'], bundle: true, write: false, format: 'esm', platform: 'node', define: { 'import.meta.env.MODE': '"production"' } });
   const savedGlobals = { window: globalThis.window, localStorage: globalThis.localStorage, fetch: globalThis.fetch };
   const data = new Map();
   const operations = [];

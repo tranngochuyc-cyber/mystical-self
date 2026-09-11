@@ -1,19 +1,18 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { zodiacSigns, elementColors, type Element } from '../../data/cosmos';
-import { modalityNames, zodiacId } from '../../data/knowledge';
-const elementOrder: Element[] = ['Lửa', 'Đất', 'Khí', 'Nước'];
+import { knowledgeEntities, entityById, relatedEntities } from '../../data/knowledge';
+const elements = knowledgeEntities.filter(e => e.type === 'element');
+const modalities = knowledgeEntities.filter(e => e.type === 'modality');
+const signs = knowledgeEntities.filter(e => e.type === 'zodiac');
+const belongs = (id: string, target: string) => entityById[id].relationships.some(r => r.target === target);
 export function ZodiacMatrix() {
-  const [selected, setSelected] = useState(0);
-  const sign = zodiacSigns[selected];
-  return <div className="zodiac-matrix-section"><div className="cosmic-heading"><div className="eyebrow">ĐỌC CẤU TRÚC HOÀNG ĐẠO</div><h2>Bốn nguyên tố.<br/><em>Ba cách chuyển động.</em></h2><p>Nguyên tố gợi cách biểu đạt. Tính chất — modality — gợi cách bắt đầu, duy trì hoặc thay đổi. Chọn một ô để nhìn mối liên hệ.</p></div>
-    <div className="zodiac-matrix" role="table" aria-label="Ma trận nguyên tố và tính chất của 12 cung"><div className="matrix-row" role="row"><span role="columnheader">Tính chất</span>{elementOrder.map(element => <span role="columnheader" key={element} style={{ color: elementColors[element] }}>{element}</span>)}</div>
-      {modalityNames.map((modality, row) => <div role="row" className="matrix-row" key={modality}><span role="rowheader"><strong>{modality}</strong><small>{['Khởi đầu', 'Duy trì', 'Thích nghi'][row]}</small></span>{elementOrder.map(element => {
-        const index = zodiacSigns.findIndex((s, i) => s.element === element && i % 3 === row);
-        const item = zodiacSigns[index];
-        return <div role="cell" key={element}><button className={index === selected ? 'matrix-selected' : item.element === sign.element || index % 3 === selected % 3 ? 'matrix-related' : ''} aria-label={`${item.name}: ${element}, ${modality}`} aria-pressed={index === selected} onClick={() => setSelected(index)} style={{ color: elementColors[element] }}><span aria-hidden="true">{item.symbol}</span><strong>{item.name}</strong></button></div>;
-      })}</div>)}
-    </div><div className="matrix-summary" aria-live="polite"><span className="matrix-equation"><strong>{sign.symbol}</strong> {sign.name} <span>=</span> <span style={{ color: elementColors[sign.element] }}>{sign.element}</span> <span>+</span> {modalityNames[selected % 3]}</span><Link className="text-link" to={`/codex/${zodiacId(selected)}`}>Khám phá hồ sơ ↗</Link></div>
-    <div className="modality-flow" aria-label="Ba cách vận động"><span>↗ <strong>Tiên phong</strong><small>Bắt đầu một hướng đi</small></span><span>◎ <strong>Kiên định</strong><small>Giữ nhịp và làm sâu</small></span><span>↝ <strong>Linh hoạt</strong><small>Điều chỉnh để chuyển tiếp</small></span></div>
-  </div>;
+  const [selected, setSelected] = useState(signs[0].id);
+  const entity = entityById[selected];
+  const highlighted = (id: string) => selected === id || (entity.type === 'zodiac' ? entity.relationships.some(r => ['element','modality'].includes(r.kind) && belongs(id,r.target)) : belongs(id, selected));
+  return <section className="zodiac-matrix-section structure-matrix" aria-label="Nguyên tố và tính chất"><div className="cosmic-heading"><div className="eyebrow">4 NGUYÊN TỐ × 3 TÍNH CHẤT = 12 CUNG</div><h2>Bốn nguyên tố.<br/><em>Ba cách chuyển động.</em></h2><p>Nguyên tố gợi cách biểu đạt; tính chất gợi cách khởi đầu, duy trì hoặc thích nghi. Chọn tên hàng, cột hoặc một cung để lần theo mối liên hệ.</p></div>
+    <div className="zodiac-matrix" role="table" aria-label="Ma trận 4 nguyên tố và 3 tính chất"><div className="matrix-row" role="row"><span role="columnheader">Nguyên tố ↓<br/>Tính chất →</span>{modalities.map(m => <div role="columnheader" key={m.id}><button aria-pressed={selected === m.id} onClick={()=>setSelected(m.id)} style={{color:m.visual.color}}><span>{m.symbol}</span><strong>{m.name}</strong></button></div>)}</div>
+    {elements.map(element => <div className="matrix-row" role="row" key={element.id}><div role="rowheader"><button aria-pressed={selected === element.id} onClick={()=>setSelected(element.id)} style={{color:element.visual.color}}><span>{element.symbol}</span><strong>{element.name}</strong></button></div>{modalities.map(modality => { const sign = signs.find(s=>belongs(s.id,element.id)&&belongs(s.id,modality.id))!;return <div role="cell" key={modality.id}><button className={selected === sign.id ? 'matrix-selected' : highlighted(sign.id) ? 'matrix-related' : ''} aria-label={`${sign.name}: ${element.name}, ${modality.name}`} aria-pressed={selected === sign.id} onClick={()=>setSelected(sign.id)} style={{color:element.visual.color}}><span aria-hidden="true">{sign.symbol}</span><strong>{sign.name}</strong></button></div>;})}</div>)}
+    </div><div className="matrix-summary" aria-live="polite"><div><h3 style={{color:entity.visual.color}}>{entity.symbol} {entity.name}</h3><p>{entity.shortDescription}</p><p>{entity.keywords.join(' · ')}</p><div className="matrix-links">{relatedEntities(entity.id).filter(r=>entity.type === 'zodiac' ? ['element','modality'].includes(r.kind) : r.entity.type === 'zodiac').map(r=><Link key={r.entity.id} to={`/codex/${r.entity.id}`}>{r.entity.symbol} {r.entity.name}</Link>)}</div></div><Link className="text-link" to={`/codex/${entity.id}`}>Khám phá hồ sơ ↗</Link></div>
+    <p className="cosmic-caption">Các ô sáng cho thấy cùng nguyên tố hoặc tính chất trong hệ biểu tượng, không đánh giá tính cách hay độ hợp nhau.</p>
+  </section>;
 }

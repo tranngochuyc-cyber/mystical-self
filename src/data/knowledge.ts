@@ -1,6 +1,6 @@
 import { elementColors, planets, zodiacSigns, type Element } from './cosmos';
 
-export type EntityType = 'zodiac' | 'planet' | 'house' | 'element' | 'modality' | 'mythology' | 'kingdom' | 'character' | 'faction' | 'artifact' | 'creature' | 'story' | 'event';
+export type EntityType = 'zodiac' | 'planet' | 'house' | 'element' | 'modality' | 'mythology' | 'kingdom' | 'character' | 'faction' | 'artifact' | 'creature' | 'story' | 'event' | 'mystery' | 'location' | 'lore';
 export type RelationshipKind = 'element' | 'modality' | 'traditional-ruler' | 'modern-ruler' | 'analogy' | 'complement';
 export interface Relationship { target: string; kind: RelationshipKind; label: string }
 export interface KnowledgeEntity {
@@ -73,8 +73,22 @@ const modalities: KnowledgeEntity[] = modalityIds.map((id, index) => ({
   description: ['Khởi đầu một hướng đi', 'Duy trì và làm sâu', 'Điều chỉnh và chuyển tiếp'][index], keywords: [['Bắt đầu', 'Chủ động'], ['Giữ nhịp', 'Cam kết'], ['Thích nghi', 'Chuyển đổi']][index], relationships: [],
   visual: { color: ['#dfbd82', '#9cc6ba', '#bba6df'][index] }, metadata: { source: 'https://www.astro.com/astrowiki/en/Quadruplicities' },
 }));
-export const knowledgeEntities = [...zodiacs, ...planetary, ...houses, ...elements, ...modalities];
-export const entityById = Object.assign(Object.create(null), Object.fromEntries(knowledgeEntities.map(entity => [entity.id, entity]))) as Record<string, KnowledgeEntity>;
+// Derived fields keep existing content and /codex/:entityId links authoritative.
+// Concepts are descriptive terms, not invented graph entities or astronomical facts.
+export interface AstrologyEntity extends KnowledgeEntity {
+  slug: string;
+  shortDescription: string;
+  interpretation: 'astrology';
+  concepts: string[];
+}
+export const knowledgeEntities: AstrologyEntity[] = [...zodiacs, ...planetary, ...houses, ...elements, ...modalities].map(entity => ({
+  ...entity,
+  slug: entity.id,
+  shortDescription: entity.description,
+  interpretation: 'astrology',
+  concepts: entity.type === 'house' ? [...entity.keywords] : [],
+}));
+export const entityById = Object.assign(Object.create(null), Object.fromEntries(knowledgeEntities.map(entity => [entity.id, entity]))) as Record<string, AstrologyEntity>;
 export function relatedEntities(id: string) {
   const entity = entityById[id];
   if (!entity) return [];

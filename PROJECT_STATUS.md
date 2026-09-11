@@ -1,41 +1,32 @@
 # PROJECT STATUS
 
-CURRENT PHASE: Public deployment
-CURRENT WORK UNIT: DEPLOY-GH-PAGES — readiness
-LAST SAFE CHECKPOINT: GitHub Pages ready, 2026-09-11
+CURRENT PHASE: Phase 2 knowledge exploration
+CURRENT WORK UNIT: Completion pass — COMPLETE
+LAST SAFE CHECKPOINT: Phase 2 completion; source local, not deployed
 SAFE TO STOP: YES
 
-## COMPLETED
-- Data graph 41 mục, quan hệ hai chiều, tìm kiếm tiếng Việt/Anh và theo quan hệ; 3 test dữ liệu pass.
-- Zodiac wheel, constellation và artwork; Planet Explorer 3 lớp; House wheel; Elements/Modality matrix; comparison; Codex detail và Connection Map đã triển khai.
-- Codex có lối vào trong thanh điều hướng mobile; route con giữ trạng thái active.
-- Chặn khóa kế thừa không hợp lệ trong tra cứu entity; sửa thông báo lưu/xóa để phân biệt dữ liệu trình duyệt và tài khoản.
-- Build client + Worker pass. Test backend/storage/data: 8/8 pass. Engine gốc: 8/8 pass ở checkpoint trước, source engine không đổi.
-- Có sổ ghi chép động: danh sách, trang đọc, tạo, lưu nháp, xuất bản và sửa bài theo chủ sở hữu; không cần giao diện admin.
-- Migration 0002 tạo bảng articles và hai index theo truy vấn thực tế. Backend kiểm tra quyền sửa theo author_id.
-- Điều hướng desktop/mobile có mục Ghi chép; khu editorial trang chủ dẫn vào sổ.
-- Build pass; backend/storage/knowledge 9/9 pass, gồm luồng bài viết qua hai tài khoản.
+## COMPLETED — CURRENT SOURCE OF TRUTH
+- WU-01: shared 41-entity model and bidirectional relationships; future types include location/lore/mystery without fantasy records.
+- WU-02–06: Zodiac, Planet, House, 4×3 Matrix and refocus Connection Map complete; previous behavior retained.
+- WU-07/08: all 41 Codex detail routes, related entities, shared Explore Next, map, return-to-Explorer links; selected zodiac/planet/house restored on return.
+- WU-09: direct-entry beginner guide for five types, three content layers, WHAT/HOW/WHERE, rulership/luminaries and limits. Cultural symbol notes for all 12 signs have source links; no fictional lore.
+- WU-10: mobile Codex entry and active subroutes, hash-safe in-page navigation/skip link, entity page titles, reduced-motion CSS. Existing React MotionConfig and observer cleanup retained.
+- House P1: six opposite pairs and Angular/Succedent/Cadent groups with reference; labels distinguish interpretation from personal calculations.
+- WU-11: production browser QA across 41 Codex entries, empty/invalid search, links, form create/save/reload and regressions. Desktop/mobile 320/390/768/1440; keyboard and emulated touch.
 
-## PARTIAL
-- Phase 2 đã có chức năng cốt lõi nhưng chưa đủ QA toàn bộ để tuyên bố hoàn thành.
-- Responsive đã xem Codex/profile/map desktop 1440 và mobile 390/320; trang chủ/comparison 320 và 768 không tràn ngang; điều hướng Codex hoạt động. Chưa kiểm thử mọi tổ hợp trên thiết bị thật.
-- Nội dung thần thoại cung mới là chú giải hình tượng ngắn; chưa có truyện/tích riêng cho từng cung.
-- Beginner explanations có ở sections; cần hoàn thiện thuật ngữ ngay trong các trang Codex truy cập trực tiếp.
+## VALIDATION
+- Browser suite: scripts/phase2-suite.mjs against Pages production preview at localhost:4174/mystical-self/. Run build:pages before starting it; do not rebuild while browser tests run.
+- Data: knowledge 5 tests + context 1 test; engine 8 tests; backend 5 tests; storage 1 test.
+- Storage test harness now explicitly supplies production MODE, matching Vite rather than undefined import.meta.env.
+- Build Sites and GitHub Pages PASS. No dependency changes. No public deployment.
+- QA screenshots retained in project; physical devices not available. Automated checks are not a complete assistive-technology audit.
 
-## NOT STARTED
-- Fantasy Universe/lore lớn, ephemeris thật, transit, phục hồi/xử lý xung đột offline.
-- Checkpoint WU-12 đã xuất bản riêng tư lên Site hiện có: https://mystical-self.aurora-vole-9148.chatgpt.site
-
-## KNOWN ISSUES
-- Local preview không chạy API Worker; chỉ lưu khách trên trình duyệt.
-- Đồng bộ lỗi giữ cache nhưng chưa có UI retry/recovery; chưa QA end-to-end đăng nhập hai tài khoản trên bản triển khai mới.
-- ADMIN_USER_IDS vẫn được giữ cho API nội dung công cụ cũ; Journal không dùng vai trò admin và kiểm quyền bằng chủ bài viết. Không ghi giá trị bí mật trong source.
-- Dev server có thể dừng khi phiên công cụ kết thúc; khởi động lại bằng npm run dev nếu localhost không kết nối.
+## RELEASE / LIMITATIONS
+- GitHub Pages public version remains the previous deployment. Pages cannot host Worker/D1/auth/Journal sync; its static/local-only messaging remains.
+- Live multi-account sign-in and server recovery need a separate authenticated release/backend pass. Backend isolation tests pass locally; no claim of live login QA.
+- Real birth chart, Moon sign, ascendant, transit or live ephemeris NOT implemented; approximations and learning diagrams stay labeled.
+- Long-form myths and Fantasy Universe are separate content/Phase 3 work; this phase includes concise sourced cultural notes only.
+- PHASE2_FOUNDATION.md is the historical WU-01 baseline, superseded by this status for completion.
 
 ## NEXT ACTION
-Người dùng tạo/chọn GitHub repository và cung cấp URL hoặc kết nối remote. Sau đó push `main`; GitHub Actions sẽ public `dist/client`. Không tiếp tục feature trước khi public deploy hoàn tất.
-
-BUILD STATUS: PASS cho Sites và GitHub Pages (2026-09-11). GITHUB PAGES DEPLOY: BLOCKED vì chưa có GitHub remote. SAFE TO STOP: YES.
-
-## IMPORTANT ARCHITECTURE NOTES
-React/Vite/npm hiện hữu; giữ routes, migration, package-lock. knowledge.ts là nguồn quan hệ; cosmic components tái sử dụng. Nhà–cung chỉ là liên tưởng hiện đại có nhãn. Các chart cá nhân chưa tính thật phải giữ nhãn minh họa. Đọc PROJECT_TODO.md rồi chỉ đọc file của work unit tiếp theo; không full audit lại.
+PHASE 2 RELEASE QA + PUBLIC DEPLOY — only when requested. No automatic deployment or Phase 3 work.

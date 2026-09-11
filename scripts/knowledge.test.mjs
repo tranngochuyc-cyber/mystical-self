@@ -18,6 +18,22 @@ test('Zodiac matrix covers each element/modality combination exactly once', () =
   assert.equal(pairs.length, 12);
   assert.equal(new Set(pairs).size, 12);
 });
+test('Shared model preserves routes, content layers and house concepts', () => {
+  for (const entity of knowledgeEntities) {
+    assert.equal(entity.slug, entity.id);
+    assert.match(entity.slug, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+    assert.equal(entity.shortDescription, entity.description);
+    assert.equal(entity.interpretation, 'astrology');
+    if (entity.type === 'house') assert.ok(entity.concepts.length > 0);
+    if (entity.type === 'planet') assert.ok(entity.metadata.astronomy);
+  }
+});
+test('Scorpio links resolve forward and backward without conflating house analogy with rulership', () => {
+  const expected = ['element-water', 'modality-fixed', 'planet-pluto', 'planet-mars', 'house-8'];
+  assert.deepEqual(relatedEntities('zodiac-scorpio').map(r => r.entity.id).sort(), expected.sort());
+  for (const id of expected) assert.ok(relatedEntities(id).some(r => r.entity.id === 'zodiac-scorpio'));
+  assert.equal(relatedEntities('zodiac-scorpio').find(r => r.entity.id === 'house-8').kind, 'analogy');
+});
 test('Search finds related rulers, Vietnamese accents and respects categories', () => {
   assert.deepEqual(discover('Mars').map(e => e.id).sort(), ['planet-mars', 'zodiac-aries', 'zodiac-scorpio']);
   assert.ok(discover('bach duong').some(e => e.id === 'zodiac-aries'));

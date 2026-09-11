@@ -340,3 +340,75 @@ body { background: var(--color-background); }
   .journey-index h3 { font-size: 1.6rem; }
   .cosmic-return { flex-direction: column; gap: 5px; }
 }
+/* WU-02: scoped input and detail improvements. */
+.zodiac-experience .zodiac-point:focus-visible { outline: 3px solid #fff0c6; outline-offset: 5px; }
+.zodiac-experience .zodiac-point[aria-pressed=true] { box-shadow: 0 0 0 4px #dfbd8255; font-weight: bold; }
+.zodiac-experience .zodiac-point:active { background: #fff0c6; color: #101420; }
+.zodiac-mobile-select { display: none; }
+.zodiac-relationships { flex-wrap: wrap; }
+.zodiac-relationships a { text-decoration: underline; text-underline-offset: 4px; }
+.zodiac-strengths, .zodiac-terms { margin: 16px 0; }
+.zodiac-strengths > div, .zodiac-terms > div { margin: 12px 0; }
+.zodiac-strengths dt, .zodiac-terms dt { color: #dfbd82; font-weight: 600; }
+.zodiac-strengths dd, .zodiac-terms dd { margin: 5px 0 0; line-height: 1.6; }
+@media(max-width:760px) {
+  .zodiac-mobile-select { display: grid; gap: 8px; margin: 20px 0; color: #dfbd82; }
+  .zodiac-mobile-select select { width: 100%; min-height: 48px; padding: 10px; color: #f2e9d9; background: #101827; border: 1px solid #dfbd8266; border-radius: 8px; font: inherit; }
+  .zodiac-experience .wheel-filter { flex-wrap: wrap; }
+  .zodiac-experience .wheel-filter button { min-height: 44px; }
+  .zodiac-experience .zodiac-point { min-width: 44px; min-height: 44px; }
+  .zodiac-experience .zodiac-core strong { font-size: .95rem; text-align: center; }
+  .zodiac-experience .zodiac-core small { font-size: .75rem; }
+}
+/* WU-03: celestial track input and compact information layers. */
+.planet-experience .planet-orbit button:focus-visible { outline: 2px solid #ffe6b1; outline-offset: 2px; border-radius: 12px; }
+.planet-experience .planet-orbit button:active .planet-token { border-width: 3px; }
+.planet-experience .planet-orbit button[aria-pressed=true] > span:nth-child(2) { text-decoration: underline; text-underline-offset: 5px; color: #ffe6b1; }
+.planet-identity h3 { font-size: clamp(2rem, 4vw, 3rem); margin: 12px 0; }
+.planet-identity ul { display: flex; flex-wrap: wrap; gap: 10px 20px; padding: 0; list-style: none; color: #dfbd82; }
+.planet-experience .planet-layer h4 { font-size: 1.4rem; margin: 14px 0; }
+.planet-rulership ul { display: flex; flex-wrap: wrap; gap: 16px 24px; padding: 0; list-style: none; }
+.planet-rulership a { text-decoration: underline; text-underline-offset: 4px; }
+.planet-rulership small { display: block; margin-top: 5px; color: #bbc7d7; }
+.planet-experience .planet-detail > div { min-width: 0; }
+@media(max-width:760px) { .planet-experience .planet-orbit { gap: 12px; } .planet-experience .planet-controls { justify-content: center; flex-wrap: wrap; } }
+/* WU-04: house learning structure and scoped input support. */
+.house-experience .house-point:focus-visible { outline: 3px solid #ffe5ae; outline-offset: 3px; }
+.house-experience .house-point[aria-pressed=true] { font-weight: 700; border: 3px double #fff2ce; box-shadow: 0 0 0 3px #dfbd8255; }
+.house-experience .house-point:active { background: #fff2ce; color: #101827; }
+.house-learning { margin-bottom: 36px; }
+.house-learning dl { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; border-block: 1px solid #dfbd8244; padding: 20px 0; }
+.house-learning dt { color: #dfbd82; font-weight: 600; }
+.house-learning dd { margin: 8px 0 0; line-height: 1.6; }
+.house-mobile-selector { display: none; }
+@media(max-width:760px) { .house-learning dl { grid-template-columns: 1fr; } .house-mobile-selector { display: grid; gap: 10px; margin: 18px 0; } .house-mobile-selector select { min-height: 48px; width: 100%; padding: 10px; background: #101827; color: #f3e3c7; border: 1px solid #dfbd8266; border-radius: 8px; font: inherit; } .house-experience .house-core strong { font-size: 2.5rem; } }
+/* WU-05: four rows by three columns, shared classification graph. */
+.structure-matrix .matrix-row { grid-template-columns: minmax(60px,.85fr) repeat(3,minmax(0,1fr)); }
+.structure-matrix button:focus-visible { outline: 3px solid #ffe8b5; outline-offset: -3px; }
+.structure-matrix button[aria-pressed=true] { border: 2px solid currentColor; background: #dfbd8222; font-weight: 700; }
+.structure-matrix .matrix-related { box-shadow: inset 0 -3px currentColor; }
+.structure-matrix .matrix-links { display: flex; flex-wrap: wrap; gap: 14px; }
+.structure-matrix .matrix-links a { text-decoration: underline; text-underline-offset: 4px; }
+@media(max-width:760px) { .structure-matrix .matrix-row button > strong { display: block; font-size: .75rem; overflow-wrap: anywhere; } .structure-matrix .matrix-row button { min-height: 85px; padding: 5px 2px; } }
+/* WU-06: refocus graph, clear controls and compact mobile branches. */
+.connection-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; }
+.connection-tools button { min-height: 44px; padding: 8px 14px; border: 1px solid #dfbd8266; border-radius: 8px; }
+.connection-tools button:disabled { opacity: .5; }
+.connection-tools a { text-decoration: underline; text-underline-offset: 4px; }
+.connection-map-wrap :focus-visible { outline: 3px solid #f4d99c; outline-offset: 3px; }
+@media(max-width:760px) { .connection-map-wrap .connection-map { grid-template-columns: 1fr; } .connection-map-wrap .connection-node { min-height: 95px; } .connection-map-wrap .connection-center { grid-column: auto; } }
+/* Phase 2: direct-entry learning and navigation accessibility. */
+.codex-guide { margin: 20px 0 30px; padding: 16px 0; border-block: 1px solid #dfbd8244; }
+.codex-guide summary { cursor: pointer; min-height: 44px; color: #dfbd82; }
+.codex-guide h3 { margin-top: 15px; }
+.codex-guide dl { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; }
+.codex-guide dt { color: #dfbd82; font-weight: 600; }
+.codex-guide dd { margin: 8px 0; }
+.skip-link:not(:focus) { transform: translateY(-200%); pointer-events: none; }
+.cosmic-section, #main { scroll-margin-top: 100px; }
+@media(max-width:760px) { .codex-guide dl { grid-template-columns: 1fr; } .bottom-nav { grid-template-columns: repeat(5,minmax(0,1fr)); } .bottom-nav a { min-width: 0; } }
+@media(prefers-reduced-motion:reduce) { .cosmos *, .cosmic-section *, .cosmic-section { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+.codex-myth { margin: 20px 0; border-left: 2px solid #dfbd82; padding-left: 18px; }
+.codex-myth figcaption { margin: 12px 0; }
+.house-groups button { min-height: 44px; padding: 8px 12px; margin: 3px; border: 1px solid #dfbd8266; border-radius: 6px; }
+.house-groups button[aria-pressed=true] { border-width: 3px; font-weight: 700; }

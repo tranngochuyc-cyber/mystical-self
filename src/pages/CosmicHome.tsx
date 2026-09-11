@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { entityById } from '../data/knowledge';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { useApp } from '../App';
 import { CosmicHero } from '../components/cosmic/CosmicHero';
@@ -16,12 +18,15 @@ import { tools } from '../data/content';
 
 export default function CosmicHome() {
   const { readings } = useApp();
+  const [params] = useSearchParams();
+  const entity = entityById[params.get('entity') || ''];
+  useEffect(()=>{if(!entity)return; const section = entity.type === 'zodiac' ? 'zodiac' : entity.type === 'planet' ? 'planets' : entity.type === 'house' ? 'houses' : 'elements';const frame=requestAnimationFrame(()=>{const node=document.getElementById(section);node?.scrollIntoView({block:'start',behavior:'instant'});node?.setAttribute('tabindex','-1');node?.focus({preventScroll:true});});return()=>cancelAnimationFrame(frame);},[entity]);
   return <div className="cosmos"><CosmicHero/><CosmicNavigation/>
     {readings.length > 0 && <div className="container cosmic-return"><span>Tiếp nối hành trình</span><Link to={`/result/${readings[0].id}`}>{readings[0].result.title} <ArrowUpRight size={18}/></Link></div>}
-    <ZodiacExplorer/>
-    <PlanetExplorer/>
+    <ZodiacExplorer initialSelected={entity?.type === 'zodiac' ? entity.visual.index : undefined}/>
+    <PlanetExplorer initialSelected={entity?.type === 'planet' ? entity.visual.index : undefined}/>
     <BirthChartExperience/>
-    <HouseExplorer/>
+    <HouseExplorer initialSelected={entity?.type === 'house' ? entity.visual.index : undefined}/>
     <ElementBalance/>
     <MoonExperience/>
     <CompatibilityExperience/>

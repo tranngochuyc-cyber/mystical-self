@@ -1,25 +1,29 @@
 # PROJECT TODO
 
-## [P0] Must
-- GITHUB PAGES: chờ người dùng tạo/chọn repository và cung cấp URL; thêm remote rồi push main, xác nhận workflow và URL public. Không tự tạo repository theo deployment safety task.
-- WU-12 DEPLOY: DONE — migration + Journal đã xuất bản riêng tư thành công.
-- WU-09A: beginner explanations ngay tại Codex detail. Done = nội dung ngắn đúng ngữ cảnh, đọc bằng keyboard/touch, build pass, kiểm tra route cung + nhà.
-- WU-09B: QA cuối Phase 2: đường dẫn liên quan, empty search, invalid entity, form tạo/lưu kết quả gốc, responsive tablet; sửa regression trước feature khác.
-- WU-10: kiểm tra và xuất bản đúng bản đã xác minh khi đến checkpoint bàn giao Phase 2; xác nhận auth/admin trên máy chủ. Giữ audience hiện tại.
+## Phase 2 — COMPLETE
+- WU-01 shared foundation: DONE.
+- WU-02 Zodiac / WU-03 Planet / WU-04 House: DONE.
+- WU-05 Matrix / WU-06 Connection Map: DONE.
+- WU-07 Codex / WU-08 Explore Next and return flow: DONE.
+- WU-09 beginner explanations and concise sourced cultural notes: DONE.
+- WU-10 mobile Codex, input/reduced motion/navigation debt: DONE.
+- House P1 axes and three groups: DONE.
+- WU-11 final feature/data/regression/production QA: DONE.
 
-## [P1] Important
-- Thêm tự động lưu bản nháp cục bộ và khôi phục nội dung đang gõ nếu kết nối mất trước lần lưu đầu.
-- Cân nhắc xóa bài có hộp xác nhận và cơ chế phục hồi; chưa thêm vì yêu cầu hiện tại chỉ cần tạo/sửa.
-- WU-11: bổ sung thần thoại riêng cho 12 cung từ nguồn tin cậy, phân biệt với astronomy và fantasy. Không dựng lore giả làm lịch sử.
-- Kiểm thử nhiều tài khoản và thêm phục hồi/retry cho thao tác offline trước khi gọi đồng bộ là hoàn chỉnh.
+## NEXT — Release pass (not authorized in completion pass)
+- Verify final commit, run production smoke QA and deploy only on user request.
+- Confirm static Pages limitations remain truthful; use separate backend hosting for server features.
+- Live authenticated multi-account QA belongs to server release; local backend tests cover access isolation.
 
-## [P2] Enhancement
-- Visual language riêng cho từng nguyên tố, cải thiện chuyển trạng thái sau core QA.
-- Tên trang Codex detail cụ thể; nội dung sâu hơn và chú giải quan hệ ngược dễ đọc.
+## Separate dynamic Journal / backend backlog (outside Phase 2 knowledge UI)
+- Autosave/recover unsaved drafts; retry/recovery for offline writes and conflict handling.
+- Consider reversible article deletion only if requested.
+- Verify account synchronization on live Worker before claiming multi-device reliability.
 
-## [P3] Experimental
-- Fantasy Universe: chỉ bắt đầu khi người dùng đã xem và duyệt Phase 2.
-- Engine thiên văn thật: cần chọn dữ liệu/engine và xác minh trước, không mô phỏng kết quả thật.
+## Phase 3 / optional later content
+- Fantasy universe and long-form myth narratives; no kingdoms, gods, characters or storyline created now.
+- True ephemeris/ascendant/transit engine needs a verified engine and data.
+- Physical-device and assistive-technology coverage beyond current browser automation.
 
 ## Execution rule
-Một work unit một phạm vi, 0 dependency mặc định. Dành khoảng 10% cuối lượt cho build, checkpoint và bàn giao; không mở work unit mới khi không đủ phần dự phòng. Mỗi điểm dừng phải build pass và có NEXT ACTION. Không hứa đo chính xác phần trăm token nếu môi trường không cung cấp bộ đếm.
+Keep checkpoints buildable. No deployment or next phase without the requested scope. Avoid repeated full audits and preserve budget for tests/checkpoint.
