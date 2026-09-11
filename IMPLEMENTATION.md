@@ -78,7 +78,7 @@ SAFE TO STOP: YES. Chưa xuất bản bản nâng cấp; bản localhost dành c
 
 ## CHECKPOINT: WU-12 — Dynamic Journal
 
-STATUS: DONE cho implementation; chờ xác nhận triển khai. SAFE TO STOP: YES.
+STATUS: DONE và đã triển khai riêng tư. SAFE TO STOP: YES.
 
 CREATED: drizzle/0002_articles.sql, src/pages/JournalPage.tsx. MODIFIED: server/index.ts, src/lib/api.ts, src/types.ts, src/App.tsx, src/components/cosmic/CosmicKnowledge.tsx, src/cosmic.css, scripts/backend.test.mjs và tài liệu checkpoint. REMOVED: không có. DEPENDENCIES: 0 mới.
 

@@ -1,7 +1,7 @@
 # PROJECT TODO
 
 ## [P0] Must
-- WU-12 DEPLOY: xuất bản migration + Journal lên Site hiện có và kiểm tra trạng thái triển khai.
+- WU-12 DEPLOY: DONE — migration + Journal đã xuất bản riêng tư thành công.
 - WU-09A: beginner explanations ngay tại Codex detail. Done = nội dung ngắn đúng ngữ cảnh, đọc bằng keyboard/touch, build pass, kiểm tra route cung + nhà.
 - WU-09B: QA cuối Phase 2: đường dẫn liên quan, empty search, invalid entity, form tạo/lưu kết quả gốc, responsive tablet; sửa regression trước feature khác.
 - WU-10: kiểm tra và xuất bản đúng bản đã xác minh khi đến checkpoint bàn giao Phase 2; xác nhận auth/admin trên máy chủ. Giữ audience hiện tại.

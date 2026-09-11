@@ -24,16 +24,16 @@ SAFE TO STOP: YES
 
 ## NOT STARTED
 - Fantasy Universe/lore lớn, ephemeris thật, transit, phục hồi/xử lý xung đột offline.
-- Đang chuẩn bị xuất bản checkpoint WU-12 lên Site hiện có.
+- Checkpoint WU-12 đã xuất bản riêng tư lên Site hiện có: https://mystical-self.aurora-vole-9148.chatgpt.site
 
 ## KNOWN ISSUES
 - Local preview không chạy API Worker; chỉ lưu khách trên trình duyệt.
 - Đồng bộ lỗi giữ cache nhưng chưa có UI retry/recovery; chưa QA end-to-end đăng nhập hai tài khoản trên bản triển khai mới.
-- ADMIN_USER_IDS đã được cấu hình trên Sites trước checkpoint; áp dụng khi triển khai lần tới. Không ghi giá trị bí mật trong source.
+- ADMIN_USER_IDS vẫn được giữ cho API nội dung công cụ cũ; Journal không dùng vai trò admin và kiểm quyền bằng chủ bài viết. Không ghi giá trị bí mật trong source.
 - Dev server có thể dừng khi phiên công cụ kết thúc; khởi động lại bằng npm run dev nếu localhost không kết nối.
 
 ## NEXT ACTION
-Sau khi xác nhận triển khai: WU-09A hoàn thiện giải thích ngắn cho người mới ở Codex detail. Không mở thêm tính năng Journal trước khi người dùng kiểm tra.
+Sau khi người dùng kiểm tra bản online: WU-09A hoàn thiện giải thích ngắn cho người mới ở Codex detail. Không mở thêm tính năng Journal trước khi có phản hồi.
 
 BUILD STATUS: PASS (npm run build, 2026-09-11). TEST STATUS: 9/9 PASS.
 
