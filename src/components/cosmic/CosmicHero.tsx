@@ -22,9 +22,9 @@ export function CosmicHero() {
     <div className="container cosmic-hero-layout">
       <div className="cosmic-hero-copy"><div className="eyebrow">MYSTICAL SELF · ĐÀI QUAN SÁT BÊN TRONG</div>
         <h1>Cả một vũ trụ.<br/><em>Một bản thể bạn.</em></h1>
-        <p>Đi qua những vì sao, chạm vào những biểu tượng.<br/>Tìm một góc nhìn khiến bạn hiểu mình thêm.</p>
-        <div className="actions"><a className="button primary" href="#zodiac">Bước vào hoàng đạo <ArrowDown size={18}/></a><Link className="text-link" to="/profile">Chòm sao của tôi <ArrowUpRight size={17}/></Link></div>
-        <p className="cosmic-caption">Khám phá biểu tượng · Giải trí & tự suy ngẫm</p>
+        <p>Khám phá chiêm tinh tương tác: cung hoàng đạo, thiên thể và những đường nối ý nghĩa. Tạo Cosmic Identity từ ba cung bạn tự chọn.</p>
+        <div className="actions"><a className="button primary" href="#zodiac">Explore the Cosmos <ArrowDown size={18}/></a><Link className="text-link" to="/profile">Create Your Cosmic Identity <ArrowUpRight size={17}/></Link></div>
+        <p className="cosmic-caption">Chiêm tinh là diễn giải biểu tượng · Cosmic Profile do bạn tự chọn</p>
       </div>
       <motion.div className="cosmic-hero-map" style={{ x: reduced ? 0 : springX, y: reduced ? 0 : springY }}>
         <Celestial/><a className="hero-coordinate coordinate-sun" href="#chart"><span>☉</span> Bản đồ sao</a><a className="hero-coordinate coordinate-moon" href="#moon"><span>☽</span> Nhịp Mặt Trăng</a>

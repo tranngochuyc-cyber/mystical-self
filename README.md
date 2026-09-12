@@ -1,55 +1,32 @@
-# Mystical Self
+# Mystical Self · V1
 
-Website tiếng Việt khám phá bản thân qua chín công cụ và Cosmic Codex với 41 mục liên kết. React, TypeScript, Vite, CSS, Framer Motion và Lucide; Worker + D1 phục vụ dữ liệu tài khoản và quản trị nội dung.
+Interactive Astrology Exploration + Cosmic Identity. Website tiếng Việt khám phá biểu tượng chiêm tinh, phân biệt nội dung thiên văn và diễn giải sáng tạo.
 
-## Chạy và kiểm tra
+Public: https://tranngochuyc-cyber.github.io/mystical-self/
 
-Dùng phiên bản Node phù hợp Vite 7 (máy hiện tại dùng Node 24).
+## Tính năng
+- Zodiac, Planet, House Explorers; Element/Modality Matrix; Connection Map.
+- Cosmic Codex: 41 mục kiến thức liên kết, giải thích cho người mới.
+- Cosmic Profile: tự chọn Sun/Moon/Rising, tỷ lệ nguyên tố/tính chất, archetype sáng tạo, lưu/sửa/đặt lại riêng trên trình duyệt.
+- Chín công cụ suy ngẫm, kết quả đã lưu; giao diện bàn phím và điện thoại.
 
-```sh
-npm install
-npm run dev
-npm run build
-npm test
-node --test scripts/backend.test.mjs scripts/storage.test.mjs scripts/knowledge.test.mjs
-```
+## Phát triển
+Stack: React 19, TypeScript, Vite 7, React Router, CSS, Framer Motion, Lucide. Dùng Node 24 và npm ci, sau đó npm run dev.
 
-Vite xem trước giao diện tại localhost:5173, không chạy API Worker. Chế độ này giữ kết quả khách trên trình duyệt. Kiểm thử backend dùng SQLite trong bộ nhớ, không chạm dữ liệu thật.
+- npm run build: build Sites client + Worker.
+- npm run build:pages: production GitHub Pages, base /mystical-self/.
+- npm run preview -- --mode github-pages --port 4174 --strictPort: xem bản Pages tại http://localhost:4174/mystical-self/.
+- npm test: engine tests.
+- node scripts/phase2-suite.mjs: regression trên preview đang chạy.
+- node scripts/cosmic-identity-browser.test.mjs và node scripts/v1-closure.test.mjs: hồ sơ, navigation, metadata, 404 và lỗi tải.
+- node --test scripts/cosmic-identity.test.mjs scripts/storage.test.mjs scripts/backend.test.mjs scripts/knowledge-context.test.mjs: logic/data/storage.
+- node scripts/phase3-release-smoke.mjs: public smoke; RELEASE_URL có thể trỏ preview. Kiểm thử dùng Cốc Cốc headless tại đường dẫn Windows trong script; chỉnh executablePath nếu chạy ở máy khác.
 
-## Chức năng
+## Deploy
+Workflow .github/workflows/deploy.yml build và deploy khi push main. Pages dùng HashRouter: link sâu dạng /mystical-self/#/profile; reload không cần server rewrite. Canonical là trang gốc, không có SEO riêng cho từng hash route. Chỉ push sau khi tests/build/preview PASS; không force push.
 
-- Vòng hoàng đạo có chòm sao, artwork, chọn quan hệ nguyên tố/tính chất/đối diện.
-- 10 thiên thể với lớp chiêm tinh, thiên văn và thần thoại; vòng 12 nhà; la bàn nguyên tố; ma trận 3 tính chất × 4 nguyên tố.
-- Cosmic Codex: tìm tên tiếng Việt/Anh và quan hệ, hồ sơ trực quan, bản đồ liên kết, khám phá tiếp.
-- Cosmic Journal: người dùng đăng nhập tạo bài, lưu bản nháp, xuất bản và chỉnh sửa bài của chính mình; dữ liệu được lưu trong D1.
-- So sánh hai cung theo cấu trúc và câu hỏi suy ngẫm; pha trăng ước tính; thông điệp biên tập luân phiên theo ngày.
-- Giữ 9 công cụ, nháp, lưu kết quả, hồ sơ, ghi chú và chia sẻ văn bản/PNG.
-- Kết quả đăng nhập được lưu theo tài khoản trong D1; cập nhật từng bản ghi theo hàng đợi, không xóa cả tài khoản để lưu một kết quả.
-- Việc viết bài nằm ngay trong /journal và /write, không cần trang quản trị. API cũ dành cho nội dung công cụ vẫn được giữ tương thích nhưng không còn trong điều hướng.
-- Điều hướng bàn phím/touch, giao diện responsive, hỗ trợ giảm chuyển động.
+## Giới hạn V1
+Public Pages là website tĩnh. Hồ sơ lưu trên trình duyệt, không có account/cloud sync; không nên xem đây là bản sao lưu. Source Worker/D1 vẫn được giữ nhưng không chạy trên Pages. Các công cụ bản đồ sao hiện mang tính minh họa/gần đúng; không có engine ephemeris thật. Archetype là sáng tạo, không phải chẩn đoán hoặc dự đoán.
 
-## Cấu trúc
-
-src/data/knowledge.ts là dữ liệu entity và relationship dùng chung. cosmos.ts giữ mô tả cung/thiên thể; constellations.ts giữ đường nối từ D3 Celestial. src/components/cosmic chứa các trải nghiệm tái sử dụng; src/pages/CodexPage.tsx cung cấp /codex và /codex/:entityId. src/cosmic.css mở rộng thiết kế, giữ stylesheet và kiến trúc công cụ gốc.
-
-## Dữ liệu và giới hạn
-
-Khách dùng localStorage; sau đăng nhập, cache kết quả tách theo tài khoản và tải dữ liệu máy chủ. Dữ liệu khách không tự nhập vào tài khoản. Ghi chú và nháp vẫn thuộc trình duyệt. Máy chủ nhận inputSummary và nội dung kết quả, có thể chứa thông tin người dùng đã nhập hoặc được diễn giải; không nên coi chúng là dữ liệu ẩn danh. Không có liên kết kết quả công khai.
-
-Lỗi đồng bộ được thông báo và giữ bản sao cục bộ. Chưa có giao diện phục hồi xung đột/offline hoặc tự thử lại toàn bộ thao tác lỗi. Khi tải dữ liệu máy chủ, cache cũ được giữ ở khóa recovery; đây chưa phải hệ thống sao lưu nhiều phiên bản.
-
-Chiêm tinh là diễn giải biểu tượng. Bản đồ sao chỉ xác định cung Mặt Trời theo ngày gần đúng; chưa tính cung Mọc, cung Mặt Trăng, nhà cá nhân hay góc chiếu. Pha trăng dùng chu kỳ trung bình. Nhà–cung là liên tưởng hiện đại có nhãn, không đồng nhất hai khái niệm. So sánh và daily reading không đo tương hợp hay dự báo. Chưa xây Fantasy Universe.
-
-Artwork được tạo bằng AI và tối ưu thành hai atlas WebP; không phải ảnh thiên văn. Nguồn và giấy phép D3 Celestial ở public/credits.txt. Font có thể tải từ Google Fonts với font hệ thống dự phòng.
-
-## Triển khai
-
-Build tạo dist/server/index.js và dist/client. .openai/hosting.json khai báo Site và D1 binding DB; migration giữ ở drizzle/. Worker xử lý /api/* và fallback SPA. Biến môi trường quản trị đặt qua Sites, không lưu bí mật trong source.
-
-GitHub Pages dùng `npm run build:pages` và workflow `.github/workflows/deploy.yml`. Workflow tự lấy tên repository để đặt base path và dùng HashRouter, vì Pages không có SPA fallback. Artifact công khai nằm ở `dist/client`.
-
-GitHub Pages là bản tĩnh: các công cụ chạy trong trình duyệt và dữ liệu cục bộ vẫn hoạt động, nhưng đăng nhập, D1, đồng bộ đa thiết bị và tạo/sửa bài viết cần Worker nên được hiển thị là không khả dụng. Bản Sites tiếp tục cung cấp các chức năng động này.
-
-Project hiện chưa có GitHub remote. Trước lần deploy đầu tiên, tạo hoặc chọn repository GitHub, thêm remote và push nhánh `main`; sau đó vào Settings → Pages và chọn nguồn `GitHub Actions` nếu GitHub chưa tự nhận workflow.
-
-Xem IMPLEMENTATION.md để biết audit, thay đổi theo phase và kết quả kiểm tra.
+## Trạng thái
+V1 COMPLETE. Future ideas: engine chiêm tinh thật, account/cloud sync, PNG profile export, fantasy/lore, AI Oracle, offline mode. Không thuộc lỗi tồn đọng V1. Không có dependency mới trong closure pass.

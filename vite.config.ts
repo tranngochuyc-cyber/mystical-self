@@ -1,3 +1,3 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-export default defineConfig(({mode}) => { const repository = process.env.GITHUB_REPOSITORY?.split('/')[1] || 'mystical-self'; return { base: mode === 'github-pages' ? `/${repository}/` : '/', plugins: [react()], build: { outDir: 'dist/client' } }; });
+export default defineConfig(({mode}) => { const repository = process.env.GITHUB_REPOSITORY?.split('/')[1] || 'mystical-self'; return { base: mode === 'github-pages' ? `/${repository}/` : '/', plugins: [react(), { name: 'pages-canonical', transformIndexHtml(html) { return mode === 'github-pages' ? html.replace('</head>', '<link rel="canonical" href="https://tranngochuyc-cyber.github.io/mystical-self/"/><meta property="og:url" content="https://tranngochuyc-cyber.github.io/mystical-self/"/></head>') : html; } }], build: { outDir: 'dist/client' } }; });
